@@ -131,3 +131,4 @@ dmypy.json
 
 # Jupyter notebook
 notebooks/
+data/
