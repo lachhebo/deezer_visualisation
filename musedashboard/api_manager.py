@@ -56,7 +56,7 @@ def find_release_date(track: str):
     return album_data.get("release_date")
 
 
-def get_music_history(access_token, user_id):
+def get_music_history(access_token: str, user_id: str):
     params_token = (
         ('access_token', access_token),
     )
@@ -71,7 +71,7 @@ def get_music_history(access_token, user_id):
     return result
 
 
-def get_music_favorite(access_token, user_id, limit=2000):
+def get_music_favorite(access_token: str, user_id: str, limit: int = 2000):
     params = (
         ('access_token', access_token),
     )
