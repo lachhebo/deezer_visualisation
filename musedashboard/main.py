@@ -44,7 +44,7 @@ def process_curated_history_folder(root_folder_path: str):
     for filename in file_output:
         if '.csv' in filename:
             old_filename = filename
-            df_all = pd.read_csv(f'{output_dir_path}/{filename}')
+            df_all = pd.read_csv(f'{output_dir_path}/{filename}', index_col=0)
 
     for filename in files:
         if '.csv' in filename:
