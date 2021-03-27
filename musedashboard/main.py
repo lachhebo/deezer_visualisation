@@ -3,7 +3,7 @@ from datetime import datetime
 
 import pandas as pd
 import typer
-
+import time
 
 from musedashboard.api_manager import get_music_history, get_music_favorite
 from musedashboard.data_processing import process_track_history, process_favorite_tracks
@@ -21,14 +21,15 @@ def process_history_folder(root_folder_path: str):
 
     for file_name in files:
         try:
-            input_file_name = f'{input_dir_path}/{file_name}'
-            print("input file name ", input_file_name)
-            history_df: pd.DataFrame = pd.read_csv(input_file_name).set_index('id')
-            df_temp_worked: pd.DataFrame = process_track_history(history_df).set_index('timestamp')
-            output_file_name = f"{output_dir_path}/{file_name.split('/')[-1]}"
-            print("output file name ", output_file_name)
-            df_temp_worked.to_csv(output_file_name)
-            os.rename(input_file_name, f"{backup_dir_path}/{file_name}")
+            if '.csv' in file_name:
+                input_file_name = f'{input_dir_path}/{file_name}'
+                print("input file name ", input_file_name)
+                history_df: pd.DataFrame = pd.read_csv(input_file_name).set_index('id')
+                df_temp_worked: pd.DataFrame = process_track_history(history_df).set_index('timestamp')
+                output_file_name = f"{output_dir_path}/{file_name.split('/')[-1]}"
+                print("output file name ", output_file_name)
+                df_temp_worked.to_csv(output_file_name)
+                os.rename(input_file_name, f"{backup_dir_path}/{file_name}")
         except Exception as e:
             print(e)
 
@@ -37,20 +38,25 @@ def process_history_folder(root_folder_path: str):
 def process_curated_history_folder(root_folder_path: str):
     input_dir_path = f'{root_folder_path}/curated/listening_history'
     output_dir_path = f'{root_folder_path}/apps'
-    backup_dir_path = f'{root_folder_path}/backup/curated/listening_history'
+    backup_dir_path = f'{root_folder_path}/backup/apps'
     files = os.listdir(input_dir_path)
     file_output = os.listdir(output_dir_path)
-    df_all = pd.read_csv(f'{output_dir_path}/{file_output[0]}')
+    for filename in file_output:
+        if '.csv' in filename:
+            old_filename = filename
+            df_all = pd.read_csv(f'{output_dir_path}/{filename}')
 
     for filename in files:
-        input_file_name = f'{input_dir_path}/{filename}'
-        df_new = pd.read_csv(input_file_name)
-        df_all = pd.concat([df_all, df_new])
-        os.rename(input_file_name, f"{backup_dir_path}/{filename}")
+        if '.csv' in filename:
+            input_file_name = f'{input_dir_path}/{filename}'
+            df_new = pd.read_csv(input_file_name)
+            df_all = pd.concat([df_all, df_new])
+            os.rename(input_file_name, f"{backup_dir_path}/{filename}")
 
     df_all = df_all.drop_duplicates(subset=['timestamp'], ignore_index=True)
     df_all.to_csv(f"{output_dir_path}/output_result_{now.strftime('%Y-%m-%d-%H')}.csv")
-    os.rename(f'{output_dir_path}/{file_output[0]}', f"{backup_dir_path}/{file_output[0]}")
+    time.sleep(10)
+    os.rename(f'{output_dir_path}/{old_filename}', f"{backup_dir_path}/{old_filename}")
 
 
 @app.command()
