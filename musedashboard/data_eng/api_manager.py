@@ -57,9 +57,7 @@ def find_release_date(track: str):
 
 
 def get_music_history(access_token: str, user_id: str):
-    params_token = (
-        ('access_token', access_token),
-    )
+    params_token = (("access_token", access_token),)
 
     url = f"{DEEZER_API_URL}/user/{user_id}/history&limit=1000"
     response = requests.get(url, params=params_token).json()

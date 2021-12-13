@@ -1,10 +1,9 @@
-import ast
 from datetime import datetime
 
 import numpy as np
 import pandas as pd
 
-from musedashboard.api_manager import (
+from musedashboard.data_eng.api_manager import (
     find_genres,
     find_bpm,
     find_release_date,
@@ -40,13 +39,9 @@ def enrich_dataset_with_deezer_api_data(df: pd.DataFrame) -> pd.DataFrame:
     df["gain"] = df["link"].apply(lambda x: find_gain(x))
     df["release_date"] = df["link"].apply(lambda x: find_release_date(x))
     df["artist_name"] = df["artist"].apply(lambda x: x.get("name"))
-    df["artist_fans"] = df["artist"].apply(
-        lambda x: find_artist_fans(x)
-    )
+    df["artist_fans"] = df["artist"].apply(lambda x: find_artist_fans(x))
     df["album_name"] = df["album"].apply(lambda x: x.get("title"))
-    df["album_release_date"] = df["album"].apply(
-        lambda x: find_album_release_date(x)
-    )
+    df["album_release_date"] = df["album"].apply(lambda x: find_album_release_date(x))
     df["album_fans"] = df["album"].apply(lambda x: find_album_fans(x))
     return df
 

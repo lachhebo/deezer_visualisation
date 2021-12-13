@@ -5,8 +5,12 @@ import pandas as pd
 import typer
 import time
 
-from musedashboard.api_manager import get_music_history, get_music_favorite
-from musedashboard.data_processing import process_track_history, process_favorite_tracks
+from musedashboard.data_eng.api_manager import get_music_history, get_music_favorite
+from musedashboard.data_eng.data_processing import (
+    process_track_history,
+    process_favorite_tracks,
+)
+from musedashboard.mongo_job_flow import MongoJobFlow
 
 now = datetime.now()
 app = typer.Typer()
@@ -87,6 +91,11 @@ def favorite(access_token: str, user_id: str, filename: str = "favorite_tracks")
     df_favorite = pd.DataFrame(favorite_musics).set_index("id")
     df_favorite.to_csv(filename + "_" + now.strftime("%Y-%m-%d-%H") + ".csv")
     typer.echo(f"favorite tracks saved in {filename}")
+
+
+@app.command()
+def history2():
+    MongoJobFlow.save_history_in_mongo_db()
 
 
 if __name__ == "__main__":

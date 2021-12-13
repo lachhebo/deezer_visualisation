@@ -2,7 +2,7 @@ from pymongo import MongoClient
 import pandas as pd
 import os
 
-from musedashboard.history_interface import ListeningHistory
+from musedashboard.dashboard.history_interface import ListeningHistory
 
 
 class MongoHistory(ListeningHistory):

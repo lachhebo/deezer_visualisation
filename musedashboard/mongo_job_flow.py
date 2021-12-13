@@ -3,8 +3,8 @@ import os
 import pandas as pd
 from pymongo import MongoClient
 
-from musedashboard.api_manager import get_music_history
-from musedashboard.data_processing import process_track_history
+from musedashboard.data_eng.api_manager import get_music_history
+from musedashboard.data_eng.data_processing import process_track_history
 
 
 class MongoJobFlow:
@@ -20,9 +20,14 @@ class MongoJobFlow:
         df_app_muse = MongoJobFlow.get_df_history_app(client)
 
         df_new_app_muse = pd.concat([df_history_curated, df_app_muse])
-        df_without_duplicates = df_new_app_muse.drop_duplicates(subset=["timestamp"], ignore_index=True)
+        df_without_duplicates = df_new_app_muse.drop_duplicates(
+            subset=["timestamp"], ignore_index=True
+        )
 
-        client.muse_dashboard.history.insert_many(df_without_duplicates.to_dict('records'))
+        client.muse_dashboard.history.drop()
+        client.muse_dashboard.history.insert_many(
+            df_without_duplicates.to_dict("records")
+        )
 
     @staticmethod
     def get_df_history_app(client):
@@ -40,10 +45,10 @@ class MongoJobFlow:
     @staticmethod
     def _get_env_variables():
         from dotenv import load_dotenv
+
         load_dotenv()
 
         access_token = os.getenv("ACCESS_TOKEN")
         user_id = os.getenv("DEEZER_ID")
         mongo_db_password = os.getenv("MONGO_DB_PASSWORD")
         return access_token, mongo_db_password, user_id
-

@@ -1,13 +1,6 @@
-from musedashboard.csv_history import CSVHistory
-from musedashboard.mongo_db_history import MongoHistory
+from musedashboard.dashboard.csv_history import CSVHistory
+from musedashboard.dashboard.mongo_db_history import MongoHistory
 import streamlit as st
-import pandas as pd
-import json
-import ast
-import os
-import dateutil
-import matplotlib.pyplot as plt
-
 
 st.set_page_config(
     page_title="MuseDashboard: a dashboard for deezer",
