@@ -1,4 +1,5 @@
 from musedashboard.csv_history import CSVHistory
+from musedashboard.mongo_db_history import MongoHistory
 import streamlit as st
 import pandas as pd
 import json
@@ -8,10 +9,15 @@ import dateutil
 import matplotlib.pyplot as plt
 
 
+st.set_page_config(
+    page_title="MuseDashboard: a dashboard for deezer",
+    page_icon="🎹",
+)
+
 st.write("Muse Dashboard: a dashboard that follow your music taste on deezer")
 
 
-DF_HISTORY = CSVHistory.get_df_history()
+DF_HISTORY = MongoHistory.get_df_history()
 
 
 st.write("Artists you listen the most")

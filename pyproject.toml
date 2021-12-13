@@ -19,6 +19,8 @@ seaborn = "^0.11.1"
 streamlit = "^1.2.0"
 pymongo = "^4.0.1"
 python-dotenv = "^0.19.2"
+dnspython = "^2.1.0"
+prefect = "^0.15.10"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.5.4"
@@ -26,6 +28,7 @@ pytest = "^6.2.2"
 flake8 = "^3.8.4"
 nbconvert = "^6.0.7"
 vega-datasets = "^0.9.0"
+black = "^21.12b0"
 
 [build-system]
 requires = ["poetry>=0.12"]
