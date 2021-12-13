@@ -28,12 +28,12 @@ fig, res = CSVHistory.get_plot_pie_df_history_genre_plot(DF_HISTORY)
 st.pyplot(fig)
 st.write(res)
 
-st.write("Genre evolution by date")
-
-fig1 = CSVHistory.get_genre_history_plot(DF_HISTORY)
-st.pyplot(fig1)
-
-fig3 = CSVHistory.get_music_listening_history_over_time_plot(DF_HISTORY)
-
-st.write("How much do you listen to music over time")
-st.pyplot(fig3)
+# st.write("Genre evolution by date")
+#
+# fig1 = CSVHistory.get_genre_history_plot(DF_HISTORY)
+# st.pyplot(fig1)
+#
+# fig3 = CSVHistory.get_music_listening_history_over_time_plot(DF_HISTORY)
+#
+# st.write("How much do you listen to music over time")
+# st.pyplot(fig3)
