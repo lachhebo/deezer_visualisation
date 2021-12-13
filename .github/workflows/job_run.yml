@@ -32,4 +32,3 @@ jobs:
       DEEZER_ID: ${{ secrets.DEEZER_ID }}
       MONGO_DB_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
       PREFECT_CLOUD_API: ${{ secrets.PREFECT_CLOUD_API }}
-
