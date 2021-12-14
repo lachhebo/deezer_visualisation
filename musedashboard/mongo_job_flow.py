@@ -22,7 +22,7 @@ class MongoJobFlow:
         df_new_app_muse = pd.concat([df_history_curated, df_app_muse])
         df_without_duplicates = df_new_app_muse.drop_duplicates(
             subset=["timestamp"], ignore_index=True
-        )
+        ).drop(columns=["_id"])
 
         client.muse_dashboard.history.drop()
         client.muse_dashboard.history.insert_many(
@@ -38,7 +38,7 @@ class MongoJobFlow:
     @staticmethod
     def get_music_dataset(access_token, user_id):
         music_history = get_music_history(access_token, user_id)
-        df_history = pd.DataFrame(music_history).set_index("id")
+        df_history = pd.DataFrame(music_history)
         df_history_curated = process_track_history(df_history)
         return df_history_curated
 
