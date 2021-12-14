@@ -6,6 +6,7 @@ from musedashboard.dashboard.history_interface import ListeningHistory
 
 
 class MongoHistory(ListeningHistory):
+    @staticmethod
     def get_df_history():
         from dotenv import load_dotenv
 
