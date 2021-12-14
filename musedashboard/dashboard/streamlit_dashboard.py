@@ -22,10 +22,10 @@ st.write("Title you listen the most")
 st.write(DF_HISTORY.title.value_counts()[0:50])
 
 
-st.write("Genres you listen the most")
-fig, res = MongoHistory.get_plot_pie_df_history_genre_plot(DF_HISTORY)
-st.pyplot(fig)
-st.write(res)
+# st.write("Genres you listen the most")
+# fig, res = MongoHistory.get_plot_pie_df_history_genre_plot(DF_HISTORY)
+# st.pyplot(fig)
+# st.write(res)
 
 # st.write("Genre evolution by date")
 #
