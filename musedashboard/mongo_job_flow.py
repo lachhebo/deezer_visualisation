@@ -39,7 +39,7 @@ class MongoJobFlow:
     def get_music_dataset(access_token, user_id):
         music_history = get_music_history(access_token, user_id)
         df_history = pd.DataFrame(music_history).set_index("id")
-        df_history_curated = process_track_history(df_history).set_index("timestamp")
+        df_history_curated = process_track_history(df_history)
         return df_history_curated
 
     @staticmethod

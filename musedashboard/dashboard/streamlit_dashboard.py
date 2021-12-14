@@ -1,4 +1,3 @@
-from musedashboard.dashboard.csv_history import CSVHistory
 from musedashboard.dashboard.mongo_db_history import MongoHistory
 import streamlit as st
 
@@ -24,7 +23,7 @@ st.write(DF_HISTORY.title.value_counts()[0:50])
 
 
 st.write("Genres you listen the most")
-fig, res = CSVHistory.get_plot_pie_df_history_genre_plot(DF_HISTORY)
+fig, res = MongoHistory.get_plot_pie_df_history_genre_plot(DF_HISTORY)
 st.pyplot(fig)
 st.write(res)
 

@@ -61,7 +61,7 @@ class ListeningHistory:
         fig, ax = plt.subplots(facecolor="black")  # solved by add this line
 
         genres_sr = genres_sr.append(aller)
-        ax = genres_sr[genres_sr >= 150].plot.pie( # noqa
+        ax = genres_sr[genres_sr >= 150].plot.pie(  # noqa
             figsize=(50, 50), subplots=True, textprops={"color": "w"}
         )
 
