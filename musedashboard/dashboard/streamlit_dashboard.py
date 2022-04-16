@@ -13,10 +13,10 @@ DF_HISTORY = MongoHistory.get_df_history()
 
 
 st.write("Artists you listen the most")
-st.write(DF_HISTORY.artist_name.value_counts()[0:20])
+st.write(DF_HISTORY.artist_name.value_counts()[0:50])
 
 st.write("Albums you listen the most")
-st.write(DF_HISTORY.album_name.value_counts()[0:20])
+st.write(DF_HISTORY.album_name.value_counts()[0:50])
 
 st.write("Title you listen the most")
 st.write(DF_HISTORY.title.value_counts()[0:50])
