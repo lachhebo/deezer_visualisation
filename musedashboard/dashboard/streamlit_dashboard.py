@@ -1,31 +1,43 @@
 from musedashboard.dashboard.mongo_db_history import MongoHistory
 import streamlit as st
+import plotly.express as px
 
 st.set_page_config(
     page_title="MuseDashboard: a dashboard for deezer",
     page_icon="🎹",
 )
 
-st.write("Muse Dashboard: a dashboard that follow your music taste on deezer")
+st.title("Muse Dashboard: follow your music taste")
 
 
 DF_HISTORY = MongoHistory.get_df_history()
 
 
-st.write("Artists you listen the most")
-st.write(DF_HISTORY.artist_name.value_counts()[0:100])
+st.header("Top artists")
+fig = px.bar(
+    DF_HISTORY.artist_name.value_counts()[0:50], height=1000, orientation="h", width=800
+)
+st.plotly_chart(fig)
 
-st.write("Albums you listen the most")
+st.header("Top Albums")
+fig = px.bar(
+    DF_HISTORY.album_name.value_counts()[0:50], height=1000, orientation="h", width=800
+)
+st.plotly_chart(fig)
 st.write(DF_HISTORY.album_name.value_counts()[0:100])
 
-st.write("Title you listen the most")
+st.header("Top tracks")
+fig = px.bar(
+    DF_HISTORY.title.value_counts()[0:50], height=1000, orientation="h", width=800
+)
+st.plotly_chart(fig)
 st.write(DF_HISTORY.title.value_counts()[0:100])
 
 
-st.write("Genres you listen the most")
-fig, res = MongoHistory.get_plot_pie_df_history_genre_plot(DF_HISTORY)
-st.pyplot(fig)
-st.write(res)
+st.header("Top Genres")
+fig = MongoHistory.get_plot_pie_df_history_genre_plot(DF_HISTORY)
+st.plotly_chart(fig)
+
 
 # st.write("Genre evolution by date")
 #

@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import pandas as pd
 import os
+import ast
 
 from musedashboard.dashboard.history_interface import ListeningHistory
 
@@ -17,4 +18,21 @@ class MongoHistory(ListeningHistory):
         )
         collection = client.muse_dashboard.history
         df_history = pd.DataFrame(list(collection.find()))
-        return df_history
+
+        df_in_database2 = df_history.drop(columns=["_id"])
+
+        def try_or(x):
+            try:
+                return ast.literal_eval(x)
+            except Exception:
+                return []
+
+        df_in_database2["genres_f"] = df_in_database2["genres"].apply(
+            lambda x: x if type(x) == list else try_or(x)
+        )
+
+        df_in_database2["primary_genre"] = df_in_database2["genres_f"].apply(
+            lambda x: x[0] if len(x) > 0 else None
+        )
+
+        return df_in_database2
