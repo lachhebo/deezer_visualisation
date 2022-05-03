@@ -61,7 +61,7 @@ fig = px.bar(
 )
 st.plotly_chart(fig)
 with st.expander("more"):
-    st.dataframe(apply_filter(DF_HISTORY).artist_name.value_counts()[50:])
+    st.dataframe(apply_filter(DF_HISTORY).album_name.value_counts()[50:])
 
 st.header("Top tracks")
 fig = px.bar(
@@ -72,7 +72,7 @@ fig = px.bar(
 )
 st.plotly_chart(fig)
 with st.expander("more"):
-    st.write(apply_filter(DF_HISTORY).artist_name.value_counts()[50:])
+    st.write(apply_filter(DF_HISTORY).title.value_counts()[50:])
 
 
 st.header("Top Genres")
