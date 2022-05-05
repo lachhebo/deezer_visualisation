@@ -17,12 +17,18 @@ def get_history():
 DF_HISTORY = get_history()
 
 selectbox = st.sidebar.selectbox(
-    "which timelapse are you taking into account ? ", ("week", "month", "year", "all")
+    "which timelapse are you taking into account ? ", ("day", "week", "month", "year", "all")
 )
 
 
 def apply_filter(df_history):
-    if selectbox == "week":
+
+    if selectbox == "day":
+        return df_history[
+            df_history.datetime > dt.datetime.now() - dt.timedelta(days=1)
+        ]
+
+    elif selectbox == "week":
         return df_history[
             df_history.datetime > dt.datetime.now() - dt.timedelta(days=7)
         ]
