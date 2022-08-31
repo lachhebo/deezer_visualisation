@@ -2,7 +2,6 @@ name: Run Task Flow
 on:
   schedule:
     - cron: "50 * * * *"
-  workflow_dispatch
 
 jobs:
   task_job_deezer:
