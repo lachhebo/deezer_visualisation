@@ -7,25 +7,23 @@ jobs:
   task_job_deezer:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+
+    - name: Install poetry
+      run: pipx install poetry
 
     - name: Install Python 3
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
       with:
        python-version: 3.9
-
-    - name: install poetry
-      run: |
-        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+       cache: 'poetry'
 
     - name: install dependencies
       run: |
-        source $HOME/.poetry/env
         poetry install
 
     - name: Run task
       run: |
-        source $HOME/.poetry/env
         poetry run python musedashboard/main.py history2
     env:
       ACCESS_TOKEN : ${{ secrets.ACCESS_TOKEN }}
