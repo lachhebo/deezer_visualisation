@@ -4,7 +4,7 @@ import plotly.express as px
 import datetime as dt
 
 st.set_page_config(
-    page_title="MuseDashboard: a dashboard for deezer",
+    page_title="MuseDashboard: a dashboard of your music tastes",
     page_icon="🎹",
 )
 

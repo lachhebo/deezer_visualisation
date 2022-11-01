@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "musedashboard"
-version = "1.0.0"
+version = "1.0.1"
 description = ""
 authors = ["Isma Lachheb <ismael.lachheb@protonmail.com>"]
 license = "BSD-3-Clause"
