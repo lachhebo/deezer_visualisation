@@ -1,7 +1,7 @@
 name: Run Task Flow
 on:
   schedule:
-    - cron: "0 1/4 * * *"
+    - cron: "0 1/6 * * *"
 
 jobs:
   task_job_deezer:
