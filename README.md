@@ -1,4 +1,4 @@
-# Deezer_visualisation
+# Deezer Dashboard
 
 
 streamlit dashboard of my music tastes
