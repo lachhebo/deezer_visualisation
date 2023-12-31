@@ -17,7 +17,7 @@ def get_history():
 DF_HISTORY = get_history()
 
 selectbox = st.sidebar.selectbox(
-    "which timelapse are you taking into account ? ", ("day", "week", "month", "year", "all")
+    "which timelapse are you taking into account ? ", ("day", "week", "2weeks", "month", "2months")
 )
 
 
@@ -33,19 +33,20 @@ def apply_filter(df_history):
             df_history.datetime > dt.datetime.now() - dt.timedelta(days=7)
         ]
 
+    elif selectbox == "2weeks":
+        return df_history[
+            df_history.datetime > dt.datetime.now() - dt.timedelta(days=14)
+        ]
+
     elif selectbox == "month":
         return df_history[
             df_history.datetime > dt.datetime.now() - dt.timedelta(days=30)
         ]
 
-    elif selectbox == "year":
+    elif selectbox == "2months":
         return df_history[
-            df_history.datetime > dt.datetime.now() - dt.timedelta(days=355)
+            df_history.datetime > dt.datetime.now() - dt.timedelta(days=60)
         ]
-
-    elif selectbox == "all":
-        return df_history
-
 
 st.header("Top artists")
 fig = px.bar(
