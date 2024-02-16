@@ -22,14 +22,14 @@ def apply_filter(df_history):
 
 st.header("Top artists")
 fig = px.bar(
-    apply_filter(DF_HISTORY).artist_name.str.lower().value_counts()[0:50],
+    apply_filter(DF_HISTORY).artist_name.str.lower().value_counts()[0:10],
     height=1000,
     orientation="h",
     width=800,
 )
 st.plotly_chart(fig)
 with st.expander("more"):
-    st.dataframe(apply_filter(DF_HISTORY).artist_name.str.lower().value_counts()[50:])
+    st.dataframe(apply_filter(DF_HISTORY).artist_name.str.lower().value_counts()[10:])
 
 st.header("Top Albums")
 fig = px.bar(
@@ -40,7 +40,7 @@ fig = px.bar(
 )
 st.plotly_chart(fig)
 with st.expander("more"):
-    st.dataframe(apply_filter(DF_HISTORY).album_name.str.lower().value_counts()[50:])
+    st.dataframe(apply_filter(DF_HISTORY).album_name.str.lower().value_counts()[10:])
 
 st.header("Top tracks")
 fig = px.bar(
