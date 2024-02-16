@@ -33,7 +33,7 @@ with st.expander("more"):
 
 st.header("Top Albums")
 fig = px.bar(
-    apply_filter(DF_HISTORY).album_name.str.lower().value_counts()[0:50],
+    apply_filter(DF_HISTORY).album_name.str.lower().value_counts()[0:10],
     height=1000,
     orientation="h",
     width=800,
@@ -44,14 +44,14 @@ with st.expander("more"):
 
 st.header("Top tracks")
 fig = px.bar(
-    apply_filter(DF_HISTORY).title.str.lower().value_counts()[0:50],
+    apply_filter(DF_HISTORY).title.str.lower().value_counts()[0:10],
     height=1000,
     orientation="h",
     width=800,
 )
 st.plotly_chart(fig)
 with st.expander("more"):
-    st.write(apply_filter(DF_HISTORY).title.str.lower().value_counts()[50:])
+    st.write(apply_filter(DF_HISTORY).title.str.lower().value_counts()[10:])
 
 
 st.header("Top Genres")
