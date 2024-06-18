@@ -18,40 +18,75 @@ DF_HISTORY = get_history()
 
 def apply_filter(df_history):
     return df_history
-    return df_history[df_history.datetime > dt.datetime.now() - dt.timedelta(days=150)]
+    return df_history[df_history.datetime >= dt.datetime.now() - dt.timedelta(days=30)]
+
 
 st.header("Top artists")
 fig = px.bar(
-    apply_filter(DF_HISTORY).artist_name.str.lower().value_counts()[0:50],
+    apply_filter(DF_HISTORY)
+    .artist_name.str.replace(r"\(.*\)", "")
+    .str.replace(r"\[.*\]", "")
+    .str.strip()
+    .str.lower()
+    .value_counts()[0:50],
     height=1000,
     orientation="h",
     width=800,
 )
 st.plotly_chart(fig)
 with st.expander("more"):
-    st.dataframe(apply_filter(DF_HISTORY).artist_name.str.lower().value_counts()[50:])
+    st.dataframe(
+        apply_filter(DF_HISTORY)
+        .artist_name.str.replace(r"\(.*\)", "")
+        .str.replace(r"\[.*\]", "")
+        .str.strip()
+        .str.lower()
+        .value_counts()[50:]
+    )
 
 st.header("Top Albums")
 fig = px.bar(
-    apply_filter(DF_HISTORY).album_name.str.lower().value_counts()[0:50],
+    apply_filter(DF_HISTORY)
+    .album_name.str.replace(r"\(.*\)", "")
+    .str.replace(r"\[.*\]", "")
+    .str.strip()
+    .str.lower()
+    .value_counts()[0:50],
     height=1000,
     orientation="h",
     width=800,
 )
 st.plotly_chart(fig)
 with st.expander("more"):
-    st.dataframe(apply_filter(DF_HISTORY).album_name.str.lower().value_counts()[50:])
+    st.dataframe(
+        apply_filter(DF_HISTORY)
+        .album_name.str.replace(r"\(.*\)", "")
+        .str.replace(r"\[.*\]", "")
+        .str.strip()
+        .str.lower()
+        .value_counts()[50:]
+    )
 
 st.header("Top tracks")
 fig = px.bar(
-    apply_filter(DF_HISTORY).title.str.lower().value_counts()[0:50],
+    apply_filter(DF_HISTORY)
+    # .title #str.replace(r"\(.*\)", "")
+    # .str.replace(r"\[.*\]", "")
+    .title.str.strip().str.lower().value_counts()[0:50],
     height=1000,
     orientation="h",
     width=800,
 )
 st.plotly_chart(fig)
 with st.expander("more"):
-    st.write(apply_filter(DF_HISTORY).title.str.lower().value_counts()[50:])
+    st.write(
+        apply_filter(DF_HISTORY)
+        # .title.str.replace(r"\(.*\)", "")
+        # .str.replace(r"\[.*\]", "")
+        .title.str.strip()
+        .str.lower()
+        .value_counts()[50:]
+    )
 
 
 st.header("Top Genres")
