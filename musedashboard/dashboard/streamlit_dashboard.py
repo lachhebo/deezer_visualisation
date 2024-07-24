@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 
-@st.cache(ttl=60 * 60 * 1, allow_output_mutation=True)
+@st.cache(ttl=60 * 120 * 1, allow_output_mutation=True)
 def get_history():
     return MongoHistory.get_df_history()
 
@@ -18,7 +18,7 @@ DF_HISTORY = get_history()
 
 def apply_filter(df_history):
     return df_history
-    return df_history[df_history.datetime >= dt.datetime.now() - dt.timedelta(days=30)]
+    #return df_history[df_history.datetime >= dt.datetime.now() - dt.timedelta(days=30)]
 
 
 st.header("Top artists")
