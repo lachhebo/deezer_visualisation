@@ -18,7 +18,7 @@ DF_HISTORY = get_history()
 
 def apply_filter(df_history):
     #return df_history
-    return df_history[df_history.datetime >= dt.datetime.now() - dt.timedelta(days=200)]
+    return df_history[df_history.datetime >= dt.datetime.now() - dt.timedelta(days=40)]
 
 
 st.header("Top artists")
