@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 
-@st.cache(ttl=60 * 120 * 1, allow_output_mutation=True)
+@st.cache(ttl=60 * 60 * 1, allow_output_mutation=True)
 def get_history():
     return MongoHistory.get_df_history()
 
@@ -18,8 +18,7 @@ DF_HISTORY = get_history()
 
 def apply_filter(df_history):
     #return df_history
-    return df_history[df_history.datetime >= dt.datetime.now() - dt.timedelta(days=360)]
-
+    return df_history[df_history.datetime > dt.datetime.now() - dt.timedelta(days=350)]
 
 st.header("Top artists")
 fig = px.bar(
@@ -51,6 +50,8 @@ fig = px.bar(
     .str.replace(r"\[.*\]", "")
     .str.strip()
     .str.lower()
+    .str.replace("qalf infinity", "qalf")
+    .str.replace("planet gold", "planet")
     .value_counts()[0:50],
     height=1000,
     orientation="h",
@@ -64,6 +65,8 @@ with st.expander("more"):
         .str.replace(r"\[.*\]", "")
         .str.strip()
         .str.lower()
+        .str.replace("qalf infinity", "qalf")
+        .str.replace("planet gold", "planet")
         .value_counts()[50:]
     )
 
@@ -72,7 +75,7 @@ fig = px.bar(
     apply_filter(DF_HISTORY)
     # .title #str.replace(r"\(.*\)", "")
     # .str.replace(r"\[.*\]", "")
-    .title.str.strip().str.lower().value_counts()[0:50],
+    .title.str.strip().value_counts()[0:50],
     height=1000,
     orientation="h",
     width=800,
@@ -83,9 +86,7 @@ with st.expander("more"):
         apply_filter(DF_HISTORY)
         # .title.str.replace(r"\(.*\)", "")
         # .str.replace(r"\[.*\]", "")
-        .title.str.strip()
-        .str.lower()
-        .value_counts()[50:]
+        .title.str.strip().value_counts()[50:]
     )
 
 
